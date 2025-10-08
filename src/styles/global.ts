@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { typography } from "./typography";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -11,12 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     background: ${(props) => props.theme["gray-100"]};
     color: ${(props) => props.theme["black-400"]};
     -webkit-font-smoothing: antialiased;
-  }
-
-  body, input, textarea, button, p {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 130%;
+    font: ${typography.textL};
+    padding: 2rem 10rem;
   }
 `;
