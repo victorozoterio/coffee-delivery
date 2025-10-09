@@ -13,6 +13,5 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme["black-400"]};
     -webkit-font-smoothing: antialiased;
     font: ${typography.textL};
-    padding: 2rem 10rem;
   }
 `;
