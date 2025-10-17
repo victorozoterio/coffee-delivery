@@ -36,10 +36,26 @@ export const HeaderContainer = styled.header`
   }
 
   #shopping-cart {
+    position: relative;
     background-color: ${(props) => props.theme["yellow-200"]};
     border-color: transparent;
     border-radius: 6px;
     padding: 0.5rem;
     height: 100%;
+
+    span {
+      display: flex;
+      position: absolute;
+      top: -0.7rem;
+      right: -0.7rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      align-items: center;
+      justify-content: center;
+      background-color: ${(props) => props.theme["yellow-800"]};
+      color: ${(props) => props.theme.white};
+      font: ${typography.textXS};
+      border-radius: 50%;
+    }
   }
 `;

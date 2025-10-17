@@ -17,6 +17,7 @@ export function Header() {
         </div>
 
         <button id="shopping-cart">
+          <span>3</span>
           <ShoppingCart size={22} weight="fill" color={theme["yellow-800"]} />
         </button>
       </div>
