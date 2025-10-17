@@ -94,16 +94,12 @@ export function Home() {
 
               <div>
                 <div className="amount">
-                  <button className="remove-coffee">
-                    <Minus
-                      size={14}
-                      weight="bold"
-                      color={theme["purple-600"]}
-                    />
+                  <button className="add-remove-coffee">
+                    <Minus size={14} weight="bold" />
                   </button>
                   <p className="amount-coffee">1</p>
-                  <button className="add-coffee">
-                    <Plus size={14} weight="bold" color={theme["purple-600"]} />
+                  <button className="add-remove-coffee">
+                    <Plus size={14} weight="bold" />
                   </button>
                 </div>
 
@@ -138,16 +134,12 @@ export function Home() {
 
               <div>
                 <div className="amount">
-                  <button className="remove-coffee">
-                    <Minus
-                      size={14}
-                      weight="bold"
-                      color={theme["purple-600"]}
-                    />
+                  <button className="add-remove-coffee">
+                    <Minus size={14} weight="bold" />
                   </button>
                   <p className="amount-coffee">1</p>
-                  <button className="add-coffee">
-                    <Plus size={14} weight="bold" color={theme["purple-600"]} />
+                  <button className="add-remove-coffee">
+                    <Plus size={14} weight="bold" />
                   </button>
                 </div>
 
@@ -185,16 +177,12 @@ export function Home() {
 
               <div>
                 <div className="amount">
-                  <button className="remove-coffee">
-                    <Minus
-                      size={14}
-                      weight="bold"
-                      color={theme["purple-600"]}
-                    />
+                  <button className="add-remove-coffee">
+                    <Minus size={14} weight="bold" />
                   </button>
                   <p className="amount-coffee">1</p>
-                  <button className="add-coffee">
-                    <Plus size={14} weight="bold" color={theme["purple-600"]} />
+                  <button className="add-remove-coffee">
+                    <Plus size={14} weight="bold" />
                   </button>
                 </div>
 
@@ -230,16 +218,12 @@ export function Home() {
 
               <div>
                 <div className="amount">
-                  <button className="remove-coffee">
-                    <Minus
-                      size={14}
-                      weight="bold"
-                      color={theme["purple-600"]}
-                    />
+                  <button className="add-remove-coffee">
+                    <Minus size={14} weight="bold" />
                   </button>
                   <p className="amount-coffee">1</p>
-                  <button className="add-coffee">
-                    <Plus size={14} weight="bold" color={theme["purple-600"]} />
+                  <button className="add-remove-coffee">
+                    <Plus size={14} weight="bold" />
                   </button>
                 </div>
 

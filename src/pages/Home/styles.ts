@@ -11,8 +11,7 @@ export const HomeContainer = styled.header`
   .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-items: self-end;
-    padding-inline: 9rem;
+    padding-inline: 7rem;
   }
 
   .content {
@@ -71,11 +70,15 @@ export const HomeContainer = styled.header`
     background-color: ${(props) => props.theme["purple-600"]};
   }
 
-  .banner img {
-    width: 29.75rem;
-    height: 22.5rem;
-    margin-top: 7.875rem;
-    animation: slideIn 1s ease-out forwards, swing 5s linear infinite 1s;
+  .banner {
+    justify-self: self-end;
+
+    img {
+      width: 29.75rem;
+      height: 22.5rem;
+      margin-top: 7.875rem;
+      animation: slideIn 1s ease-out forwards, swing 5s linear infinite 1s;
+    }
   }
 
   @keyframes slideIn {
@@ -109,7 +112,7 @@ export const HomeContainer = styled.header`
 
   .catalog {
     margin-block: 2rem 3.375rem;
-    padding-inline: 9rem;
+    padding-inline: 7rem;
 
     > h2 {
       font: ${typography.titleL};
@@ -175,7 +178,7 @@ export const HomeContainer = styled.header`
       .price {
         font: ${typography.textS};
         color: ${(props) => props.theme["black-200"]};
-        margin-right: 1.5rem;
+        margin-right: 1.375rem;
 
         > strong {
           font: ${typography.titleM};
@@ -198,12 +201,15 @@ export const HomeContainer = styled.header`
             align-self: center;
           }
 
-          .remove-coffee {
+          .add-remove-coffee {
+            width: 2rem;
             padding: 0.75rem 0.5rem 0.5rem 0.5rem;
-          }
+            color: ${(props) => props.theme["purple-600"]};
+            cursor: pointer;
 
-          .add-coffee {
-            padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+            &:hover {
+              color: ${(props) => props.theme["purple-800"]};
+            }
           }
 
           > p {
