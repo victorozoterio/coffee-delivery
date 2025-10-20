@@ -1,13 +1,12 @@
 import { HomeContainer } from "./styles";
 import {
-  Coffee,
-  Minus,
+  Coffee as CoffeeIcon,
   Package,
-  Plus,
   ShoppingCart,
   Timer,
 } from "phosphor-react";
 import { useTheme } from "styled-components";
+import { Coffee } from "./components/Coffee";
 
 export function Home() {
   const theme = useTheme();
@@ -58,7 +57,7 @@ export function Home() {
 
             <span>
               <div className="purple-circle">
-                <Coffee size={16} weight="fill" color={theme["gray-100"]} />
+                <CoffeeIcon size={16} weight="fill" color={theme["gray-100"]} />
               </div>
               <p>O café chega fresquinho até você</p>
             </span>
@@ -74,169 +73,131 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <div className="catalog-options">
-          <div className="coffee">
-            <div className="coffee-image">
-              <img src="src/assets/espresso-coffee.png" alt="Café expresso" />
-            </div>
+          <Coffee
+            name="Expresso Tradicional"
+            description="O tradicional café feito com água quente e grãos moídos"
+            tags={["Tradicional"]}
+            price={9.9}
+            image="src/assets/espresso-coffee.png"
+            imageDescription="Café expresso"
+          />
 
-            <div className="tags">
-              <span>Tradicional</span>
-            </div>
+          <Coffee
+            name="Expresso Americano"
+            description="Expresso diluído, menos intenso que o tradicional"
+            tags={["Tradicional"]}
+            price={9.9}
+            image="src/assets/american-coffee.png"
+            imageDescription="Café americano"
+          />
 
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
+          <Coffee
+            name="Expresso Cremoso"
+            description="Café expresso tradicional com espuma cremosa"
+            tags={["Tradicional"]}
+            price={9.9}
+            image="src/assets/creamy-espresso-coffee.png"
+            imageDescription="Café cremoso"
+          />
 
-            <div className="buy-coffee">
-              <span className="price">
-                R$
-                <strong> 9,90</strong>
-              </span>
+          <Coffee
+            name="Expresso Gelado"
+            description="Bebida preparada com cafeteria expresso e cubos de gelo"
+            tags={["Tradicional", "Gelado"]}
+            price={9.9}
+            image="src/assets/iced-coffee.png"
+            imageDescription="Café gelado"
+          />
 
-              <div>
-                <div className="amount">
-                  <button className="add-remove-coffee">
-                    <Minus size={14} weight="bold" />
-                  </button>
-                  <p className="amount-coffee">1</p>
-                  <button className="add-remove-coffee">
-                    <Plus size={14} weight="bold" />
-                  </button>
-                </div>
+          <Coffee
+            name="Café com Leite"
+            description="Meio a meio de expresso tradicional com leite vaporizado"
+            tags={["Tradicional", "Com leite"]}
+            price={9.9}
+            image="src/assets/coffee-with-milk.png"
+            imageDescription="Café com leite"
+          />
 
-                <button className="shopping-cart">
-                  <ShoppingCart
-                    size={22}
-                    weight="fill"
-                    color={theme["gray-200"]}
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
+          <Coffee
+            name="Latte"
+            description="Uma dose de café expresso com o dobro de leite e espuma cremosa"
+            tags={["Tradicional", "Com leite"]}
+            price={9.9}
+            image="src/assets/latte-coffee.png"
+            imageDescription="Café latte"
+          />
 
-          <div className="coffee">
-            <div className="coffee-image">
-              <img src="src/assets/american-coffee.png" alt="Café expresso" />
-            </div>
+          <Coffee
+            name="Capuccino"
+            description="Bebida com canela feita de doses iguais de café, leite e espuma"
+            tags={["Tradicional", "Com leite"]}
+            price={9.9}
+            image="src/assets/cappuccino-coffee.png"
+            imageDescription="Café capuccino"
+          />
 
-            <div className="tags">
-              <span>Tradicional</span>
-            </div>
+          <Coffee
+            name="Macchiato"
+            description="Café expresso misturado com um pouco de leite quente e espuma"
+            tags={["Tradicional", "Com leite"]}
+            price={9.9}
+            image="src/assets/macchiato-coffee.png"
+            imageDescription="Café macchiato"
+          />
 
-            <h3>Expresso Americano</h3>
-            <p>Expresso diluído, menos intenso que o tradicional</p>
+          <Coffee
+            name="Mocaccino"
+            description="Café expresso com calda de chocolate, pouco leite e espuma"
+            tags={["Tradicional", "Com leite"]}
+            price={9.9}
+            image="src/assets/mocaccino-coffee.png"
+            imageDescription="Café mocaccino"
+          />
 
-            <div className="buy-coffee">
-              <span className="price">
-                R$
-                <strong> 9,90</strong>
-              </span>
+          <Coffee
+            name="Chocolate Quente"
+            description="Bebida feita com chocolate dissolvido no leite quente e café"
+            tags={["Especial", "Com leite"]}
+            price={9.9}
+            image="src/assets/hot-chocolate-coffee.png"
+            imageDescription="Café chocolate quente"
+          />
 
-              <div>
-                <div className="amount">
-                  <button className="add-remove-coffee">
-                    <Minus size={14} weight="bold" />
-                  </button>
-                  <p className="amount-coffee">1</p>
-                  <button className="add-remove-coffee">
-                    <Plus size={14} weight="bold" />
-                  </button>
-                </div>
+          <Coffee
+            name="Cubano"
+            description="Drink gelado de café expresso com rum, creme de leite e hortelã"
+            tags={["Especial", "Alcoólico", "Gelado"]}
+            price={9.9}
+            image="src/assets/cuban-coffee.png"
+            imageDescription="Café cubano"
+          />
 
-                <button className="shopping-cart">
-                  <ShoppingCart
-                    size={22}
-                    weight="fill"
-                    color={theme["gray-200"]}
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
+          <Coffee
+            name="Havaiano"
+            description="Drink feito com café e leite de coco"
+            tags={["Especial"]}
+            price={9.9}
+            image="src/assets/hawaiian-coffee.png"
+            imageDescription="Café havaiano"
+          />
 
-          <div className="coffee">
-            <div className="coffee-image">
-              <img
-                src="src/assets/creamy-espresso-coffee.png"
-                alt="Café expresso"
-              />
-            </div>
+          <Coffee
+            name="Árabe"
+            description="Bebida preparada com grãos de café árabe e especiarias"
+            tags={["Especial"]}
+            price={9.9}
+            image="src/assets/arabic-coffee.png"
+            imageDescription="Café árabe"
+          />
 
-            <div className="tags">
-              <span>Tradicional</span>
-            </div>
-
-            <h3>Expresso Cremoso</h3>
-            <p>Café expresso tradicional com espuma cremosa</p>
-
-            <div className="buy-coffee">
-              <span className="price">
-                R$
-                <strong> 9,90</strong>
-              </span>
-
-              <div>
-                <div className="amount">
-                  <button className="add-remove-coffee">
-                    <Minus size={14} weight="bold" />
-                  </button>
-                  <p className="amount-coffee">1</p>
-                  <button className="add-remove-coffee">
-                    <Plus size={14} weight="bold" />
-                  </button>
-                </div>
-
-                <button className="shopping-cart">
-                  <ShoppingCart
-                    size={22}
-                    weight="fill"
-                    color={theme["gray-200"]}
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="coffee">
-            <div className="coffee-image">
-              <img src="src/assets/iced-coffee.png" alt="Café expresso" />
-            </div>
-
-            <div className="tags">
-              <span>Tradicional</span>
-              <span>Gelado</span>
-            </div>
-
-            <h3>Expresso Gelado</h3>
-            <p>Bebida preparada com café expresso e cubos de gelo</p>
-
-            <div className="buy-coffee">
-              <span className="price">
-                R$
-                <strong> 9,90</strong>
-              </span>
-
-              <div>
-                <div className="amount">
-                  <button className="add-remove-coffee">
-                    <Minus size={14} weight="bold" />
-                  </button>
-                  <p className="amount-coffee">1</p>
-                  <button className="add-remove-coffee">
-                    <Plus size={14} weight="bold" />
-                  </button>
-                </div>
-
-                <button className="shopping-cart">
-                  <ShoppingCart
-                    size={22}
-                    weight="fill"
-                    color={theme["gray-200"]}
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
+          <Coffee
+            name="Irlandês"
+            description="Bebida com cortesia de café, uísque irlandês e chantilly"
+            tags={["Especial", "Alcoólico"]}
+            price={9.9}
+            image="src/assets/irish-coffee.png"
+            imageDescription="Café irlandês"
+          />
         </div>
       </div>
     </HomeContainer>
