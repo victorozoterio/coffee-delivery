@@ -2,9 +2,12 @@ import { HeaderContainer } from "./styles";
 import logo from "../../assets/logo.svg";
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { useTheme } from "styled-components";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export function Header() {
   const theme = useTheme();
+  const { getTotalItems } = useContext(CartContext);
 
   return (
     <HeaderContainer>
@@ -17,7 +20,7 @@ export function Header() {
         </div>
 
         <button id="shopping-cart">
-          <span>3</span>
+          <span>{getTotalItems()}</span>
           <ShoppingCart size={22} weight="fill" color={theme["yellow-800"]} />
         </button>
       </div>
