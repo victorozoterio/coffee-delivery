@@ -87,9 +87,11 @@ export const CoffeeContainer = styled.header`
         }
 
         > p {
+          width: 1.25rem;
           font: ${typography.textM};
           color: ${(props) => props.theme["black-600"]};
           align-self: center;
+          text-align: center;
         }
       }
 

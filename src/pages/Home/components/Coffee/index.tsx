@@ -81,7 +81,7 @@ export function Coffee({
             >
               <Minus size={14} weight="bold" />
             </button>
-            <p className="amount-coffee">{quantity}</p>
+            <p>{quantity}</p>
             <button
               className="add-remove-coffee"
               onClick={handleIncreaseQuantity}
