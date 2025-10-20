@@ -20,7 +20,7 @@ export function Header() {
         </div>
 
         <button id="shopping-cart">
-          <span>{getTotalItems()}</span>
+          {getTotalItems() > 0 && <span>{getTotalItems()}</span>}
           <ShoppingCart size={22} weight="fill" color={theme["yellow-800"]} />
         </button>
       </div>
