@@ -134,10 +134,15 @@ export const CheckoutContainer = styled.header`
       }
 
       #payment-methods input[type="radio"] {
-        display: none;
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
       }
 
-      #payment-methods label:hover {
+      #payment-methods label:hover,
+      #payment-methods label:has(input:focus) {
         background-color: ${(props) => props.theme["gray-500"]};
       }
 
