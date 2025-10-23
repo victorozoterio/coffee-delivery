@@ -4,7 +4,10 @@ import {
   CreditCard,
   CurrencyDollarSimple,
   MapPinLine,
+  Minus,
   Money,
+  Plus,
+  Trash,
 } from "phosphor-react";
 import { useTheme } from "styled-components";
 import { useState } from "react";
@@ -95,6 +98,93 @@ export function Checkout() {
               </label>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="selected-coffees">
+        <h3>Cafés selecionados</h3>
+
+        <div id="selected-coffees-container">
+          <div id="coffee">
+            <div id="coffee-info">
+              <img src="src/assets/espresso-coffee.png" alt="Café expresso" />
+              <div id="coffee-name-and-actions">
+                <h4>Expresso Tradicional</h4>
+
+                <div id="action-buttons">
+                  <div className="amount">
+                    <button className="add-remove-coffee">
+                      <Minus size={14} weight="bold" />
+                    </button>
+
+                    <p>1</p>
+
+                    <button className="add-remove-coffee">
+                      <Plus size={14} weight="bold" />
+                    </button>
+                  </div>
+
+                  <button id="trash">
+                    <Trash size={16} color={theme["purple-600"]} />
+                    <p>Remover</p>
+                  </button>
+                </div>
+              </div>
+              <p>R$ 9,90</p>
+            </div>
+
+            <div id="divider"></div>
+          </div>
+
+          <div id="coffee">
+            <div id="coffee-info">
+              <img src="src/assets/latte-coffee.png" alt="Café expresso" />
+              <div id="coffee-name-and-actions">
+                <h4>Latte</h4>
+
+                <div id="action-buttons">
+                  <div className="amount">
+                    <button className="add-remove-coffee">
+                      <Minus size={14} weight="bold" />
+                    </button>
+
+                    <p>2</p>
+
+                    <button className="add-remove-coffee">
+                      <Plus size={14} weight="bold" />
+                    </button>
+                  </div>
+
+                  <button id="trash">
+                    <Trash size={16} color={theme["purple-600"]} />
+                    <p>Remover</p>
+                  </button>
+                </div>
+              </div>
+              <p>R$ 19,80</p>
+            </div>
+
+            <div id="divider"></div>
+          </div>
+
+          <div id="order-info">
+            <div id="total-items">
+              <p>Total de itens</p>
+              <p>R$ 29,70</p>
+            </div>
+
+            <div id="delivery-fee">
+              <p>Entrega</p>
+              <p>R$ 3,50</p>
+            </div>
+
+            <div id="final-price">
+              <p>Total</p>
+              <p>R$ 33,20</p>
+            </div>
+          </div>
+
+          <button id="confirm-order">Confirmar Pedido</button>
         </div>
       </section>
     </CheckoutContainer>

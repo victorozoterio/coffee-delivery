@@ -69,12 +69,6 @@ export const CoffeeContainer = styled.header`
         border-radius: 0.5rem;
         height: 2.375rem;
 
-        > button {
-          background-color: transparent;
-          border: transparent;
-          align-self: center;
-        }
-
         .add-remove-coffee {
           width: 2rem;
           padding: 0.75rem 0.5rem 0.5rem 0.5rem;

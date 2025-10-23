@@ -13,6 +13,12 @@ export const GlobalStyle = createGlobalStyle`
     pointer-events: none;
   }
 
+  button {
+    background-color: transparent;
+    border: transparent;
+    align-self: center;
+  }
+  
   body {
     background: ${(props) => props.theme["gray-100"]};
     color: ${(props) => props.theme["black-400"]};

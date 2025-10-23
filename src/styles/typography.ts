@@ -5,6 +5,8 @@ export const typography = {
   titleS: "700 1.25rem/130% 'Baloo 2', cursive",
   titleXS: "700 1.125rem/130% 'Baloo 2', cursive",
 
+  boldTextL: "700 1.25rem/130% 'Roboto', sans-serif",
+  boldTextM: "700 1rem/130% 'Roboto', sans-serif",
   textL: "400 1.25rem/130% 'Roboto', sans-serif",
   textM: "400 1rem/130% 'Roboto', sans-serif",
   textS: "400 0.875rem/130% 'Roboto', sans-serif",
