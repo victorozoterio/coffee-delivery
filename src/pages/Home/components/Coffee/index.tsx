@@ -29,17 +29,16 @@ export function Coffee({
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addItem({
-        id,
-        name,
-        description,
-        tags,
-        price,
-        image,
-        imageDescription,
-      });
-    }
+    addItem({
+      id,
+      name,
+      description,
+      tags,
+      price,
+      image,
+      imageDescription,
+      quantity,
+    });
     setQuantity(1);
   };
 

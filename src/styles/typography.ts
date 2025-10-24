@@ -1,7 +1,7 @@
 export const typography = {
   titleXL: "800 3rem/130% 'Baloo 2', cursive",
   titleL: "800 2rem/130% 'Baloo 2', cursive",
-  titleM: "800 1.5rem/130% 'Baloo 2', cursive",
+  titleM: "800 1.375rem/130% 'Baloo 2', cursive",
   titleS: "700 1.25rem/130% 'Baloo 2', cursive",
   titleXS: "700 1.125rem/130% 'Baloo 2', cursive",
 

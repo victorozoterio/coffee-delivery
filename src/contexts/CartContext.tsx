@@ -13,7 +13,7 @@ export interface CartItem {
 
 export interface CartContextType {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, "quantity">) => void;
+  addItem: (item: CartItem) => void;
   removeItem: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
   getTotalItems: () => number;
@@ -30,21 +30,18 @@ interface CartProviderProps {
 export function CartProvider({ children }: CartProviderProps) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  const addItem = (item: Omit<CartItem, "quantity">) => {
+  const addItem = (item: CartItem) => {
     setItems((prevItems) => {
       const existingItem = prevItems.find(
         (cartItem) => cartItem.id === item.id
       );
+      if (!existingItem) return [...prevItems, { ...item }];
 
-      if (existingItem) {
-        return prevItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      }
-
-      return [...prevItems, { ...item, quantity: 1 }];
+      return prevItems.map((cartItem) =>
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
     });
   };
 

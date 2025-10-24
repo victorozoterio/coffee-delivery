@@ -92,7 +92,7 @@ export const CoffeeContainer = styled.header`
       .shopping-cart {
         margin-left: 1rem;
         background-color: ${(props) => props.theme["purple-800"]};
-        padding-inline: 0.5rem;
+        padding: 0.25rem 0.5rem;
         border-radius: 0.5rem;
         border: transparent;
       }
