@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useState } from "react";
+import { createContext, type ReactNode, useState, useEffect } from "react";
 
 export interface CartItem {
   id: number;
@@ -27,8 +27,26 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
+const CART_STORAGE_KEY = "@coffee-delivery:cart";
+
 export function CartProvider({ children }: CartProviderProps) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+    if (storedCart) {
+      const parsedCart = JSON.parse(storedCart);
+      setItems(parsedCart);
+    }
+    setIsInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    }
+  }, [items, isInitialized]);
 
   const addItem = (item: CartItem) => {
     setItems((prevItems) => {
