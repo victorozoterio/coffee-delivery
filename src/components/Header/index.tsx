@@ -4,6 +4,7 @@ import { MapPin, ShoppingCart } from "phosphor-react";
 import { useTheme } from "styled-components";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { NavLink } from "react-router-dom";
 
 export function Header() {
   const theme = useTheme();
@@ -11,7 +12,9 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <img src={logo} alt="logo" />
+      <NavLink to="/" id="home" title="Página inicial">
+        <img src={logo} alt="logo" />
+      </NavLink>
 
       <div className="icons">
         <div id="location">
@@ -19,10 +22,10 @@ export function Header() {
           <p>Indaiatuba, SP</p>
         </div>
 
-        <button id="shopping-cart">
+        <NavLink to="/checkout" id="shopping-cart" title="Carrinho de compras">
           {getTotalItems() > 0 && <span>{getTotalItems()}</span>}
           <ShoppingCart size={22} weight="fill" color={theme["yellow-800"]} />
-        </button>
+        </NavLink>
       </div>
     </HeaderContainer>
   );
