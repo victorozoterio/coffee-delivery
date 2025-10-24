@@ -10,11 +10,19 @@ import {
   Trash,
 } from "phosphor-react";
 import { useTheme } from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
+import { moneyMaskWithoutCurrency } from "../../utils/masks";
 
 export function Checkout() {
   const theme = useTheme();
   const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const { items, removeItem, updateQuantity, getTotalPrice } =
+    useContext(CartContext);
+
+  const DELIVERY_FEE = 3.5;
+  const totalItemsPrice = getTotalPrice();
+  const totalPrice = totalItemsPrice + DELIVERY_FEE;
 
   return (
     <CheckoutContainer>
@@ -105,86 +113,79 @@ export function Checkout() {
         <h3>Cafés selecionados</h3>
 
         <div id="selected-coffees-container">
-          <div id="coffee">
-            <div id="coffee-info">
-              <img src="src/assets/espresso-coffee.png" alt="Café expresso" />
-              <div id="coffee-name-and-actions">
-                <h4>Expresso Tradicional</h4>
+          {items.length === 0 ? (
+            <div id="empty-cart">
+              <p>Seu carrinho está vazio</p>
+            </div>
+          ) : (
+            items.map((item) => (
+              <div key={item.id} id="coffee">
+                <div id="coffee-info">
+                  <img src={item.image} alt={item.imageDescription} />
+                  <div id="coffee-name-and-actions">
+                    <h4>{item.name}</h4>
 
-                <div id="action-buttons">
-                  <div className="amount">
-                    <button className="add-remove-coffee">
-                      <Minus size={14} weight="bold" />
-                    </button>
+                    <div id="action-buttons">
+                      <div className="amount">
+                        <button
+                          className="add-remove-coffee"
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                        >
+                          <Minus size={14} weight="bold" />
+                        </button>
 
-                    <p>1</p>
+                        <p>{item.quantity}</p>
 
-                    <button className="add-remove-coffee">
-                      <Plus size={14} weight="bold" />
-                    </button>
+                        <button
+                          className="add-remove-coffee"
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                        >
+                          <Plus size={14} weight="bold" />
+                        </button>
+                      </div>
+
+                      <button id="trash" onClick={() => removeItem(item.id)}>
+                        <Trash size={16} color={theme["purple-600"]} />
+                        <p>Remover</p>
+                      </button>
+                    </div>
                   </div>
-
-                  <button id="trash">
-                    <Trash size={16} color={theme["purple-600"]} />
-                    <p>Remover</p>
-                  </button>
+                  <p>
+                    R$ {moneyMaskWithoutCurrency(item.price * item.quantity)}
+                  </p>
                 </div>
+
+                <div id="divider"></div>
               </div>
-              <p>R$ 9,90</p>
-            </div>
+            ))
+          )}
 
-            <div id="divider"></div>
-          </div>
-
-          <div id="coffee">
-            <div id="coffee-info">
-              <img src="src/assets/latte-coffee.png" alt="Café expresso" />
-              <div id="coffee-name-and-actions">
-                <h4>Latte</h4>
-
-                <div id="action-buttons">
-                  <div className="amount">
-                    <button className="add-remove-coffee">
-                      <Minus size={14} weight="bold" />
-                    </button>
-
-                    <p>2</p>
-
-                    <button className="add-remove-coffee">
-                      <Plus size={14} weight="bold" />
-                    </button>
-                  </div>
-
-                  <button id="trash">
-                    <Trash size={16} color={theme["purple-600"]} />
-                    <p>Remover</p>
-                  </button>
-                </div>
+          {items.length > 0 && (
+            <div id="order-info">
+              <div id="total-items">
+                <p>Total de itens</p>
+                <p>R$ {moneyMaskWithoutCurrency(totalItemsPrice)}</p>
               </div>
-              <p>R$ 19,80</p>
+
+              <div id="delivery-fee">
+                <p>Entrega</p>
+                <p>R$ {moneyMaskWithoutCurrency(DELIVERY_FEE)}</p>
+              </div>
+
+              <div id="final-price">
+                <p>Total</p>
+                <p>R$ {moneyMaskWithoutCurrency(totalPrice)}</p>
+              </div>
             </div>
+          )}
 
-            <div id="divider"></div>
-          </div>
-
-          <div id="order-info">
-            <div id="total-items">
-              <p>Total de itens</p>
-              <p>R$ 29,70</p>
-            </div>
-
-            <div id="delivery-fee">
-              <p>Entrega</p>
-              <p>R$ 3,50</p>
-            </div>
-
-            <div id="final-price">
-              <p>Total</p>
-              <p>R$ 33,20</p>
-            </div>
-          </div>
-
-          <button id="confirm-order">Confirmar Pedido</button>
+          {items.length > 0 && (
+            <button id="confirm-order">Confirmar Pedido</button>
+          )}
         </div>
       </section>
     </CheckoutContainer>

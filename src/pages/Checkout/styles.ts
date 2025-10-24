@@ -175,6 +175,14 @@ export const CheckoutContainer = styled.header`
       padding: 2.5rem;
     }
 
+    #empty-cart {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      font: ${typography.textM};
+      color: ${(props) => props.theme["gray-900"]};
+    }
+
     #coffee-info {
       display: flex;
       flex-direction: row;
@@ -204,6 +212,7 @@ export const CheckoutContainer = styled.header`
 
     #coffee-name-and-actions h4 {
       font: ${typography.textM};
+      color: ${(props) => props.theme["black-400"]};
     }
 
     #action-buttons {
