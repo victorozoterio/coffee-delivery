@@ -1,32 +1,40 @@
 import { Minus, Plus } from "phosphor-react";
 import { CoffeeAmountButtonContainer } from "./styles";
-import { useState } from "react";
 
-export function CoffeeAmountButton() {
-  const [quantity, setQuantity] = useState(1);
+export interface CoffeeAmountButtonProps {
+  quantity: number;
+  onIncrease: () => void;
+  onDecrease: () => void;
+  minQuantity?: number;
+  maxQuantity?: number;
+}
 
-  const handleIncreaseQuantity = () => {
-    setQuantity((prevValue) => prevValue + 1);
-  };
-
-  const handleDecreaseQuantity = () => {
-    if (quantity > 1) setQuantity((prevValue) => prevValue - 1);
-  };
+export function CoffeeAmountButton({
+  quantity,
+  onIncrease,
+  onDecrease,
+  minQuantity = 1,
+  maxQuantity = 99,
+}: CoffeeAmountButtonProps) {
+  const isDecreaseDisabled = quantity <= minQuantity;
+  const isIncreaseDisabled = quantity >= maxQuantity;
 
   return (
     <CoffeeAmountButtonContainer>
       <button
         className="add-remove-coffee"
-        onClick={handleDecreaseQuantity}
-        disabled={quantity <= 1}
+        onClick={onDecrease}
+        disabled={isDecreaseDisabled}
       >
         <Minus size={14} weight="bold" />
       </button>
+
       <p>{quantity}</p>
+
       <button
         className="add-remove-coffee"
-        onClick={handleIncreaseQuantity}
-        disabled={quantity >= 99}
+        onClick={onIncrease}
+        disabled={isIncreaseDisabled}
       >
         <Plus size={14} weight="bold" />
       </button>

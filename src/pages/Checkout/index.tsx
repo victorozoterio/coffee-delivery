@@ -4,15 +4,14 @@ import {
   CreditCard,
   CurrencyDollarSimple,
   MapPinLine,
-  Minus,
   Money,
-  Plus,
   Trash,
 } from "phosphor-react";
 import { useTheme } from "styled-components";
 import { useState, useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { moneyMaskWithoutCurrency } from "../../utils/masks";
+import { CoffeeAmountButton } from "../../components/CoffeeAmountButton";
 
 export function Checkout() {
   const theme = useTheme();
@@ -126,27 +125,15 @@ export function Checkout() {
                     <h4>{item.name}</h4>
 
                     <div id="action-buttons">
-                      <div className="amount">
-                        <button
-                          className="add-remove-coffee"
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                        >
-                          <Minus size={14} weight="bold" />
-                        </button>
-
-                        <p>{item.quantity}</p>
-
-                        <button
-                          className="add-remove-coffee"
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                        >
-                          <Plus size={14} weight="bold" />
-                        </button>
-                      </div>
+                      <CoffeeAmountButton
+                        quantity={item.quantity}
+                        onIncrease={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                        onDecrease={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                      />
 
                       <button id="trash" onClick={() => removeItem(item.id)}>
                         <Trash size={16} color={theme["purple-600"]} />

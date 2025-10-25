@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { typography } from "../../styles/typography";
 
-export const CoffeeAmountButtonContainer = styled.header`
+export const CoffeeAmountButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${(props) => props.theme["gray-400"]};
@@ -14,7 +14,8 @@ export const CoffeeAmountButtonContainer = styled.header`
     color: ${(props) => props.theme["purple-600"]};
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: ${(props) => props.theme["purple-800"]};
     }
   }

@@ -1,9 +1,10 @@
 import { CoffeeContainer } from "./styles";
-import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { ShoppingCart } from "phosphor-react";
 import { useTheme } from "styled-components";
 import { moneyMaskWithoutCurrency } from "../../../../utils/masks";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
+import { CoffeeAmountButton } from "../../../../components/CoffeeAmountButton";
 
 export interface CoffeeProps {
   id: number;
@@ -72,23 +73,11 @@ export function Coffee({
         </span>
 
         <div>
-          <div className="amount">
-            <button
-              className="add-remove-coffee"
-              onClick={handleDecreaseQuantity}
-              disabled={quantity <= 1}
-            >
-              <Minus size={14} weight="bold" />
-            </button>
-            <p>{quantity}</p>
-            <button
-              className="add-remove-coffee"
-              onClick={handleIncreaseQuantity}
-              disabled={quantity >= 99}
-            >
-              <Plus size={14} weight="bold" />
-            </button>
-          </div>
+          <CoffeeAmountButton
+            quantity={quantity}
+            onIncrease={handleIncreaseQuantity}
+            onDecrease={handleDecreaseQuantity}
+          />
 
           <button className="shopping-cart" onClick={handleAddToCart}>
             <ShoppingCart size={22} weight="fill" color={theme["gray-200"]} />
