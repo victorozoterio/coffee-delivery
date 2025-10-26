@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { typography } from "../../../../styles/typography";
 
-export const CoffeeContainer = styled.header`
+export const CoffeeContainer = styled.div`
   display: grid;
   background-color: ${(props) => props.theme["gray-200"]};
   border-radius: 0.5rem 2rem 0.5rem 2rem;

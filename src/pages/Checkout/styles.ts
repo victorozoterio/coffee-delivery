@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { typography } from "../../styles/typography";
 
-export const CheckoutContainer = styled.header`
+export const CheckoutContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   margin-top: 2.5rem;

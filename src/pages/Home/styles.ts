@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { typography } from "../../styles/typography";
 
-export const HomeContainer = styled.header`
+export const HomeContainer = styled.div`
   #background {
     position: absolute;
     width: 100%;
