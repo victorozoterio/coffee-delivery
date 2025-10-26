@@ -12,7 +12,7 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <NavLink to="/" id="home" title="Página inicial">
+      <NavLink to="/" id="home" title="Página inicial" tabIndex={-1}>
         <img src={logo} alt="logo" />
       </NavLink>
 
@@ -22,7 +22,12 @@ export function Header() {
           <p>Indaiatuba, SP</p>
         </div>
 
-        <NavLink to="/checkout" id="shopping-cart" title="Carrinho de compras">
+        <NavLink
+          to="/checkout"
+          id="shopping-cart"
+          title="Carrinho de compras"
+          tabIndex={-1}
+        >
           {getTotalItems() > 0 && <span>{getTotalItems()}</span>}
           <ShoppingCart size={22} weight="fill" color={theme["yellow-800"]} />
         </NavLink>
