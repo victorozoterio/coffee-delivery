@@ -9,19 +9,77 @@ import {
 } from "phosphor-react";
 import { useTheme } from "styled-components";
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { moneyMaskWithoutCurrency } from "../../utils/masks";
 import { CoffeeAmountButton } from "../../components/CoffeeAmountButton";
 
+export interface AddressData {
+  cep: string;
+  street: string;
+  number: string;
+  complement?: string;
+  neighborhood: string;
+  city: string;
+  uf: string;
+}
+
+export enum PaymentMethod {
+  CREDIT_CARD = "credit-card",
+  DEBIT_CARD = "debit-card",
+  CASH = "cash",
+}
+
 export function Checkout() {
   const theme = useTheme();
-  const [paymentMethod, setPaymentMethod] = useState<string>("");
-  const { items, removeItem, updateQuantity, getTotalPrice } =
+  const navigate = useNavigate();
+
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>();
+  const [address, setAddress] = useState<AddressData>({
+    cep: "",
+    street: "",
+    number: "",
+    complement: "",
+    neighborhood: "",
+    city: "",
+    uf: "",
+  });
+
+  const { items, removeItem, updateQuantity, getTotalPrice, clearCart } =
     useContext(CartContext);
 
   const DELIVERY_FEE = 3.5;
   const totalItemsPrice = getTotalPrice();
   const totalPrice = totalItemsPrice + DELIVERY_FEE;
+
+  const handleConfirmOrder = () => {
+    if (!paymentMethod) {
+      alert("Por favor, selecione um método de pagamento");
+      return;
+    }
+
+    if (
+      !address.street ||
+      !address.number ||
+      !address.neighborhood ||
+      !address.city ||
+      !address.uf
+    ) {
+      alert("Por favor, preencha todos os campos obrigatórios do endereço");
+      return;
+    }
+
+    const orderData = {
+      address,
+      paymentMethod,
+      totalItemsPrice,
+      deliveryFee: DELIVERY_FEE,
+      totalPrice,
+    };
+
+    clearCart();
+    navigate("/success", { state: orderData });
+  };
 
   return (
     <CheckoutContainer>
@@ -42,13 +100,67 @@ export function Checkout() {
             </div>
 
             <div id="address-info">
-              <input id="cep" type="text" placeholder="CEP" />
-              <input id="street" type="text" placeholder="Rua" />
-              <input id="number" type="text" placeholder="Número" />
-              <input id="complement" type="text" placeholder="Complemento" />
-              <input id="neighborhood" type="text" placeholder="Bairro" />
-              <input id="city" type="text" placeholder="Cidade" />
-              <input id="uf" type="text" placeholder="UF" />
+              <input
+                id="cep"
+                type="text"
+                placeholder="CEP"
+                value={address.cep}
+                onChange={(e) =>
+                  setAddress({ ...address, cep: e.target.value })
+                }
+              />
+              <input
+                id="street"
+                type="text"
+                placeholder="Rua"
+                value={address.street}
+                onChange={(e) =>
+                  setAddress({ ...address, street: e.target.value })
+                }
+              />
+              <input
+                id="number"
+                type="text"
+                placeholder="Número"
+                value={address.number}
+                onChange={(e) =>
+                  setAddress({ ...address, number: e.target.value })
+                }
+              />
+              <input
+                id="complement"
+                type="text"
+                placeholder="Complemento"
+                value={address.complement}
+                onChange={(e) =>
+                  setAddress({ ...address, complement: e.target.value })
+                }
+              />
+              <input
+                id="neighborhood"
+                type="text"
+                placeholder="Bairro"
+                value={address.neighborhood}
+                onChange={(e) =>
+                  setAddress({ ...address, neighborhood: e.target.value })
+                }
+              />
+              <input
+                id="city"
+                type="text"
+                placeholder="Cidade"
+                value={address.city}
+                onChange={(e) =>
+                  setAddress({ ...address, city: e.target.value })
+                }
+              />
+              <input
+                id="uf"
+                type="text"
+                placeholder="UF"
+                value={address.uf}
+                onChange={(e) => setAddress({ ...address, uf: e.target.value })}
+              />
             </div>
           </div>
 
@@ -72,9 +184,11 @@ export function Checkout() {
                 <input
                   type="radio"
                   id="credit-card"
-                  value="credit-card"
-                  checked={paymentMethod === "credit-card"}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  value={PaymentMethod.CREDIT_CARD}
+                  checked={paymentMethod === PaymentMethod.CREDIT_CARD}
+                  onChange={(e) =>
+                    setPaymentMethod(e.target.value as PaymentMethod)
+                  }
                 />
                 <CreditCard size={16} color={theme["purple-600"]} />
                 <p>Cartão de Crédito</p>
@@ -84,9 +198,11 @@ export function Checkout() {
                 <input
                   type="radio"
                   id="debit-card"
-                  value="debit-card"
-                  checked={paymentMethod === "debit-card"}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  value={PaymentMethod.DEBIT_CARD}
+                  checked={paymentMethod === PaymentMethod.DEBIT_CARD}
+                  onChange={(e) =>
+                    setPaymentMethod(e.target.value as PaymentMethod)
+                  }
                 />
                 <Bank size={16} color={theme["purple-600"]} />
                 <p>Cartão de Débito</p>
@@ -96,9 +212,11 @@ export function Checkout() {
                 <input
                   type="radio"
                   id="cash"
-                  value="cash"
-                  checked={paymentMethod === "cash"}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  value={PaymentMethod.CASH}
+                  checked={paymentMethod === PaymentMethod.CASH}
+                  onChange={(e) =>
+                    setPaymentMethod(e.target.value as PaymentMethod)
+                  }
                 />
                 <Money size={16} color={theme["purple-600"]} />
                 <p>Dinheiro</p>
@@ -171,7 +289,9 @@ export function Checkout() {
           )}
 
           {items.length > 0 && (
-            <button id="confirm-order">Confirmar Pedido</button>
+            <button id="confirm-order" onClick={handleConfirmOrder}>
+              Confirmar Pedido
+            </button>
           )}
         </div>
       </section>
