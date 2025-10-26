@@ -11,7 +11,7 @@ import { useTheme } from "styled-components";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
-import { moneyMaskWithoutCurrency } from "../../utils/masks";
+import { mask } from "../../utils";
 import { CoffeeAmountButton } from "../../components/CoffeeAmountButton";
 
 export interface AddressData {
@@ -104,9 +104,10 @@ export function Checkout() {
                 id="cep"
                 type="text"
                 placeholder="CEP"
+                maxLength={9}
                 value={address.cep}
                 onChange={(e) =>
-                  setAddress({ ...address, cep: e.target.value })
+                  setAddress({ ...address, cep: mask.cep(e.target.value) })
                 }
               />
               <input
@@ -124,7 +125,10 @@ export function Checkout() {
                 placeholder="Número"
                 value={address.number}
                 onChange={(e) =>
-                  setAddress({ ...address, number: e.target.value })
+                  setAddress({
+                    ...address,
+                    number: mask.typingNumber(e.target.value, 5),
+                  })
                 }
               />
               <input
@@ -158,6 +162,7 @@ export function Checkout() {
                 id="uf"
                 type="text"
                 placeholder="UF"
+                maxLength={2}
                 value={address.uf}
                 onChange={(e) => setAddress({ ...address, uf: e.target.value })}
               />
@@ -260,7 +265,7 @@ export function Checkout() {
                     </div>
                   </div>
                   <p>
-                    R$ {moneyMaskWithoutCurrency(item.price * item.quantity)}
+                    R$ {mask.moneyWithoutCurrency(item.price * item.quantity)}
                   </p>
                 </div>
 
@@ -273,17 +278,17 @@ export function Checkout() {
             <div id="order-info">
               <div id="total-items">
                 <p>Total de itens</p>
-                <p>R$ {moneyMaskWithoutCurrency(totalItemsPrice)}</p>
+                <p>R$ {mask.moneyWithoutCurrency(totalItemsPrice)}</p>
               </div>
 
               <div id="delivery-fee">
                 <p>Entrega</p>
-                <p>R$ {moneyMaskWithoutCurrency(DELIVERY_FEE)}</p>
+                <p>R$ {mask.moneyWithoutCurrency(DELIVERY_FEE)}</p>
               </div>
 
               <div id="final-price">
                 <p>Total</p>
-                <p>R$ {moneyMaskWithoutCurrency(totalPrice)}</p>
+                <p>R$ {mask.moneyWithoutCurrency(totalPrice)}</p>
               </div>
             </div>
           )}

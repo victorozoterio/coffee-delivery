@@ -1,7 +1,7 @@
 import { CoffeeContainer } from "./styles";
 import { ShoppingCart } from "phosphor-react";
 import { useTheme } from "styled-components";
-import { moneyMaskWithoutCurrency } from "../../../../utils/masks";
+import { mask } from "../../../../utils";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
 import { CoffeeAmountButton } from "../../../../components/CoffeeAmountButton";
@@ -69,7 +69,7 @@ export function Coffee({
       <div className="buy-coffee">
         <span className="price">
           R$
-          <strong> {moneyMaskWithoutCurrency(price)}</strong>
+          <strong> {mask.moneyWithoutCurrency(price)}</strong>
         </span>
 
         <div>
