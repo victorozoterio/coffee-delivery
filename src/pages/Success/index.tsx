@@ -3,6 +3,7 @@ import { useLocation, Navigate } from "react-router-dom";
 import { SuccessContainer } from "./styles";
 import { CurrencyDollarSimple, MapPin, Timer } from "phosphor-react";
 import { PaymentMethod, type AddressData } from "../Checkout/types";
+import deliveryMan from "../../assets/delivery-man.png";
 
 interface OrderData {
   address: AddressData;
@@ -80,7 +81,7 @@ export function Success() {
           </span>
         </div>
 
-        <img src="src/assets/delivery-man.png" alt="Entregador" />
+        <img src={deliveryMan} alt="Entregador" />
       </div>
     </SuccessContainer>
   );

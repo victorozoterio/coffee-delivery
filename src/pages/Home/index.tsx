@@ -7,17 +7,29 @@ import {
 } from "phosphor-react";
 import { useTheme } from "styled-components";
 import { Coffee } from "./components/Coffee";
+import bannerBackground from "../../assets/banner-background.png";
+import bannerCoffee from "../../assets/banner-coffee.png";
+import espressoCoffee from "../../assets/espresso-coffee.png";
+import americanCoffee from "../../assets/american-coffee.png";
+import creamyEspressoCoffee from "../../assets/creamy-espresso-coffee.png";
+import icedCoffee from "../../assets/iced-coffee.png";
+import coffeeWithMilk from "../../assets/coffee-with-milk.png";
+import latteCoffee from "../../assets/latte-coffee.png";
+import cappuccinoCoffee from "../../assets/cappuccino-coffee.png";
+import macchiatoCoffee from "../../assets/macchiato-coffee.png";
+import mocaccinoCoffee from "../../assets/mocaccino-coffee.png";
+import hotChocolateCoffee from "../../assets/hot-chocolate-coffee.png";
+import cubanCoffee from "../../assets/cuban-coffee.png";
+import hawaiianCoffee from "../../assets/hawaiian-coffee.png";
+import arabicCoffee from "../../assets/arabic-coffee.png";
+import irishCoffee from "../../assets/irish-coffee.png";
 
 export function Home() {
   const theme = useTheme();
 
   return (
     <HomeContainer>
-      <img
-        id="background"
-        src="src/assets/banner-background.png"
-        alt="Fundo do banner"
-      />
+      <img id="background" src={bannerBackground} alt="Fundo do banner" />
 
       <div className="hero">
         <div>
@@ -65,7 +77,7 @@ export function Home() {
         </div>
 
         <div className="banner">
-          <img src="src/assets/banner-coffee.png" alt="Banner de café" />
+          <img src={bannerCoffee} alt="Banner de café" />
         </div>
       </div>
 
@@ -79,7 +91,7 @@ export function Home() {
             description="O tradicional café feito com água quente e grãos moídos"
             tags={["Tradicional"]}
             price={9.9}
-            image="src/assets/espresso-coffee.png"
+            image={espressoCoffee}
             imageDescription="Café expresso"
           />
 
@@ -89,7 +101,7 @@ export function Home() {
             description="Expresso diluído, menos intenso que o tradicional"
             tags={["Tradicional"]}
             price={9.9}
-            image="src/assets/american-coffee.png"
+            image={americanCoffee}
             imageDescription="Café americano"
           />
 
@@ -99,7 +111,7 @@ export function Home() {
             description="Café expresso tradicional com espuma cremosa"
             tags={["Tradicional"]}
             price={9.9}
-            image="src/assets/creamy-espresso-coffee.png"
+            image={creamyEspressoCoffee}
             imageDescription="Café cremoso"
           />
 
@@ -109,7 +121,7 @@ export function Home() {
             description="Bebida preparada com cafeteria expresso e cubos de gelo"
             tags={["Tradicional", "Gelado"]}
             price={9.9}
-            image="src/assets/iced-coffee.png"
+            image={icedCoffee}
             imageDescription="Café gelado"
           />
 
@@ -119,7 +131,7 @@ export function Home() {
             description="Meio a meio de expresso tradicional com leite vaporizado"
             tags={["Tradicional", "Com leite"]}
             price={9.9}
-            image="src/assets/coffee-with-milk.png"
+            image={coffeeWithMilk}
             imageDescription="Café com leite"
           />
 
@@ -129,7 +141,7 @@ export function Home() {
             description="Uma dose de café expresso com o dobro de leite e espuma cremosa"
             tags={["Tradicional", "Com leite"]}
             price={9.9}
-            image="src/assets/latte-coffee.png"
+            image={latteCoffee}
             imageDescription="Café latte"
           />
 
@@ -139,7 +151,7 @@ export function Home() {
             description="Bebida com canela feita de doses iguais de café, leite e espuma"
             tags={["Tradicional", "Com leite"]}
             price={9.9}
-            image="src/assets/cappuccino-coffee.png"
+            image={cappuccinoCoffee}
             imageDescription="Café capuccino"
           />
 
@@ -149,7 +161,7 @@ export function Home() {
             description="Café expresso misturado com um pouco de leite quente e espuma"
             tags={["Tradicional", "Com leite"]}
             price={9.9}
-            image="src/assets/macchiato-coffee.png"
+            image={macchiatoCoffee}
             imageDescription="Café macchiato"
           />
 
@@ -159,7 +171,7 @@ export function Home() {
             description="Café expresso com calda de chocolate, pouco leite e espuma"
             tags={["Tradicional", "Com leite"]}
             price={9.9}
-            image="src/assets/mocaccino-coffee.png"
+            image={mocaccinoCoffee}
             imageDescription="Café mocaccino"
           />
 
@@ -169,7 +181,7 @@ export function Home() {
             description="Bebida feita com chocolate dissolvido no leite quente e café"
             tags={["Especial", "Com leite"]}
             price={9.9}
-            image="src/assets/hot-chocolate-coffee.png"
+            image={hotChocolateCoffee}
             imageDescription="Café chocolate quente"
           />
 
@@ -179,7 +191,7 @@ export function Home() {
             description="Drink gelado de café expresso com rum, creme de leite e hortelã"
             tags={["Especial", "Alcoólico", "Gelado"]}
             price={9.9}
-            image="src/assets/cuban-coffee.png"
+            image={cubanCoffee}
             imageDescription="Café cubano"
           />
 
@@ -189,7 +201,7 @@ export function Home() {
             description="Drink feito com café e leite de coco"
             tags={["Especial"]}
             price={9.9}
-            image="src/assets/hawaiian-coffee.png"
+            image={hawaiianCoffee}
             imageDescription="Café havaiano"
           />
 
@@ -199,7 +211,7 @@ export function Home() {
             description="Bebida preparada com grãos de café árabe e especiarias"
             tags={["Especial"]}
             price={9.9}
-            image="src/assets/arabic-coffee.png"
+            image={arabicCoffee}
             imageDescription="Café árabe"
           />
 
@@ -209,7 +221,7 @@ export function Home() {
             description="Bebida com cortesia de café, uísque irlandês e chantilly"
             tags={["Especial", "Alcoólico"]}
             price={9.9}
-            image="src/assets/irish-coffee.png"
+            image={irishCoffee}
             imageDescription="Café irlandês"
           />
         </div>
