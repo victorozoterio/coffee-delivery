@@ -1,15 +1,8 @@
-import { createContext, type ReactNode, useState, useEffect } from "react";
+import { createContext, type ReactNode, useReducer, useEffect } from "react";
+import { cartReducer } from "../reducers/cart";
+import type { CartItem } from "../reducers/cart";
 
-export interface CartItem {
-  id: number;
-  name: string;
-  description: string;
-  tags: string[];
-  price: number;
-  image: string;
-  imageDescription: string;
-  quantity: number;
-}
+export type { CartItem };
 
 export interface CartContextType {
   items: CartItem[];
@@ -31,69 +24,55 @@ interface CartProviderProps {
 const CART_STORAGE_KEY = "@coffee-delivery:cart";
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [state, dispatch] = useReducer(
+    cartReducer,
+    { items: [] },
+    (initialState) => {
+      const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+      if (storedCart) return { items: JSON.parse(storedCart) };
+
+      return initialState;
+    }
+  );
 
   useEffect(() => {
-    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
-    if (storedCart) {
-      const parsedCart = JSON.parse(storedCart);
-      setItems(parsedCart);
-    }
-    setIsInitialized(true);
-  }, []);
-
-  useEffect(() => {
-    if (isInitialized) {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-    }
-  }, [items, isInitialized]);
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items));
+  }, [state.items]);
 
   const addItem = (item: CartItem) => {
-    setItems((prevItems) => {
-      const existingItem = prevItems.find(
-        (cartItem) => cartItem.id === item.id
-      );
-      if (!existingItem) return [...prevItems, { ...item }];
-
-      return prevItems.map((cartItem) =>
-        cartItem.id === item.id
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
-          : cartItem
-      );
-    });
+    dispatch({ type: "ADD_ITEM", payload: item });
   };
 
   const removeItem = (id: number) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    dispatch({ type: "REMOVE_ITEM", payload: id });
   };
 
   const updateQuantity = (id: number, quantity: number) => {
-    if (quantity <= 0) {
-      return removeItem(id);
-    }
-
-    setItems((prevItems) =>
-      prevItems.map((item) => (item.id === id ? { ...item, quantity } : item))
-    );
+    dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
   };
 
   const getTotalItems = (): number => {
-    return items.reduce((total, item) => total + item.quantity, 0);
+    return state.items.reduce(
+      (total: number, item: CartItem) => total + item.quantity,
+      0
+    );
   };
 
   const clearCart = () => {
-    setItems([]);
+    dispatch({ type: "CLEAR_CART" });
   };
 
   const getTotalPrice = (): number => {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+    return state.items.reduce(
+      (total: number, item: CartItem) => total + item.price * item.quantity,
+      0
+    );
   };
 
   return (
     <CartContext.Provider
       value={{
-        items,
+        items: state.items,
         addItem,
         removeItem,
         updateQuantity,

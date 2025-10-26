@@ -2,8 +2,7 @@ import { useTheme } from "styled-components";
 import { useLocation, Navigate } from "react-router-dom";
 import { SuccessContainer } from "./styles";
 import { CurrencyDollarSimple, MapPin, Timer } from "phosphor-react";
-import type { AddressData } from "../Checkout";
-import { PaymentMethod } from "../Checkout";
+import { PaymentMethod, type AddressData } from "../Checkout/types";
 
 interface OrderData {
   address: AddressData;

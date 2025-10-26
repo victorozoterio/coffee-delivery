@@ -8,45 +8,66 @@ import {
   Trash,
 } from "phosphor-react";
 import { useTheme } from "styled-components";
-import { useState, useContext } from "react";
+import { useReducer, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { mask } from "../../utils";
 import { CoffeeAmountButton } from "../../components/CoffeeAmountButton";
+import type { AddressData } from "./types";
+import { PaymentMethod } from "./types";
 
-export interface AddressData {
-  cep: string;
-  street: string;
-  number: string;
-  complement?: string;
-  neighborhood: string;
-  city: string;
-  uf: string;
+interface CheckoutFormState {
+  address: AddressData;
+  paymentMethod?: PaymentMethod;
 }
 
-export enum PaymentMethod {
-  CREDIT_CARD = "credit-card",
-  DEBIT_CARD = "debit-card",
-  CASH = "cash",
+type CheckoutFormAction =
+  | { type: "UPDATE_ADDRESS"; payload: Partial<AddressData> }
+  | { type: "SET_PAYMENT_METHOD"; payload: PaymentMethod };
+
+function checkoutFormReducer(
+  state: CheckoutFormState,
+  action: CheckoutFormAction
+): CheckoutFormState {
+  switch (action.type) {
+    case "UPDATE_ADDRESS":
+      return {
+        ...state,
+        address: { ...state.address, ...action.payload },
+      };
+
+    case "SET_PAYMENT_METHOD":
+      return {
+        ...state,
+        paymentMethod: action.payload,
+      };
+
+    default:
+      return state;
+  }
 }
 
 export function Checkout() {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>();
-  const [address, setAddress] = useState<AddressData>({
-    cep: "",
-    street: "",
-    number: "",
-    complement: "",
-    neighborhood: "",
-    city: "",
-    uf: "",
+  const [formState, dispatch] = useReducer(checkoutFormReducer, {
+    address: {
+      cep: "",
+      street: "",
+      number: "",
+      complement: "",
+      neighborhood: "",
+      city: "",
+      uf: "",
+    },
+    paymentMethod: undefined,
   });
 
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart } =
     useContext(CartContext);
+
+  const { address, paymentMethod } = formState;
 
   const DELIVERY_FEE = 3.5;
   const totalItemsPrice = getTotalPrice();
@@ -70,8 +91,8 @@ export function Checkout() {
     }
 
     const orderData = {
-      address,
-      paymentMethod,
+      address: address,
+      paymentMethod: paymentMethod,
       totalItemsPrice,
       deliveryFee: DELIVERY_FEE,
       totalPrice,
@@ -107,7 +128,10 @@ export function Checkout() {
                 maxLength={9}
                 value={address.cep}
                 onChange={(e) =>
-                  setAddress({ ...address, cep: mask.cep(e.target.value) })
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: { cep: mask.cep(e.target.value) },
+                  })
                 }
               />
               <input
@@ -116,7 +140,10 @@ export function Checkout() {
                 placeholder="Rua"
                 value={address.street}
                 onChange={(e) =>
-                  setAddress({ ...address, street: e.target.value })
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: { street: e.target.value },
+                  })
                 }
               />
               <input
@@ -125,9 +152,11 @@ export function Checkout() {
                 placeholder="Número"
                 value={address.number}
                 onChange={(e) =>
-                  setAddress({
-                    ...address,
-                    number: mask.typingNumber(e.target.value, 5),
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: {
+                      number: mask.typingNumber(e.target.value, 5),
+                    },
                   })
                 }
               />
@@ -137,7 +166,10 @@ export function Checkout() {
                 placeholder="Complemento"
                 value={address.complement}
                 onChange={(e) =>
-                  setAddress({ ...address, complement: e.target.value })
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: { complement: e.target.value },
+                  })
                 }
               />
               <input
@@ -146,7 +178,10 @@ export function Checkout() {
                 placeholder="Bairro"
                 value={address.neighborhood}
                 onChange={(e) =>
-                  setAddress({ ...address, neighborhood: e.target.value })
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: { neighborhood: e.target.value },
+                  })
                 }
               />
               <input
@@ -155,7 +190,10 @@ export function Checkout() {
                 placeholder="Cidade"
                 value={address.city}
                 onChange={(e) =>
-                  setAddress({ ...address, city: e.target.value })
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: { city: e.target.value },
+                  })
                 }
               />
               <input
@@ -164,7 +202,12 @@ export function Checkout() {
                 placeholder="UF"
                 maxLength={2}
                 value={address.uf}
-                onChange={(e) => setAddress({ ...address, uf: e.target.value })}
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE_ADDRESS",
+                    payload: { uf: e.target.value },
+                  })
+                }
               />
             </div>
           </div>
@@ -192,7 +235,10 @@ export function Checkout() {
                   value={PaymentMethod.CREDIT_CARD}
                   checked={paymentMethod === PaymentMethod.CREDIT_CARD}
                   onChange={(e) =>
-                    setPaymentMethod(e.target.value as PaymentMethod)
+                    dispatch({
+                      type: "SET_PAYMENT_METHOD",
+                      payload: e.target.value as PaymentMethod,
+                    })
                   }
                 />
                 <CreditCard size={16} color={theme["purple-600"]} />
@@ -206,7 +252,10 @@ export function Checkout() {
                   value={PaymentMethod.DEBIT_CARD}
                   checked={paymentMethod === PaymentMethod.DEBIT_CARD}
                   onChange={(e) =>
-                    setPaymentMethod(e.target.value as PaymentMethod)
+                    dispatch({
+                      type: "SET_PAYMENT_METHOD",
+                      payload: e.target.value as PaymentMethod,
+                    })
                   }
                 />
                 <Bank size={16} color={theme["purple-600"]} />
@@ -220,7 +269,10 @@ export function Checkout() {
                   value={PaymentMethod.CASH}
                   checked={paymentMethod === PaymentMethod.CASH}
                   onChange={(e) =>
-                    setPaymentMethod(e.target.value as PaymentMethod)
+                    dispatch({
+                      type: "SET_PAYMENT_METHOD",
+                      payload: e.target.value as PaymentMethod,
+                    })
                   }
                 />
                 <Money size={16} color={theme["purple-600"]} />
