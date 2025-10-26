@@ -25,4 +25,20 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     font: ${typography.textL};
   }
+
+  .orange {
+    background-color: ${(props) => props.theme["yellow-800"]};
+  }
+
+  .yellow {
+    background-color: ${(props) => props.theme["yellow-600"]};
+  }
+
+  .black {
+    background-color: ${(props) => props.theme["black-200"]};
+  }
+
+  .purple {
+    background-color: ${(props) => props.theme["purple-600"]};
+  }
 `;

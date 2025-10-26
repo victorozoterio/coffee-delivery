@@ -54,22 +54,6 @@ export const HomeContainer = styled.header`
     }
   }
 
-  .orange-circle {
-    background-color: ${(props) => props.theme["yellow-800"]};
-  }
-
-  .yellow-circle {
-    background-color: ${(props) => props.theme["yellow-600"]};
-  }
-
-  .black-circle {
-    background-color: ${(props) => props.theme["black-200"]};
-  }
-
-  .purple-circle {
-    background-color: ${(props) => props.theme["purple-600"]};
-  }
-
   .banner {
     justify-self: self-end;
 

@@ -31,7 +31,7 @@ export function Home() {
 
           <div className="benefits">
             <span>
-              <div className="orange-circle">
+              <div className="orange">
                 <ShoppingCart
                   size={16}
                   weight="fill"
@@ -42,21 +42,21 @@ export function Home() {
             </span>
 
             <span>
-              <div className="black-circle">
+              <div className="black">
                 <Package size={16} weight="fill" color={theme["gray-100"]} />
               </div>
               <p>Embalagem mantém o café intacto</p>
             </span>
 
             <span>
-              <div className="yellow-circle">
+              <div className="yellow">
                 <Timer size={16} weight="fill" color={theme["gray-100"]} />
               </div>
               <p>Entrega rápida e rastreada</p>
             </span>
 
             <span>
-              <div className="purple-circle">
+              <div className="purple">
                 <CoffeeIcon size={16} weight="fill" color={theme["gray-100"]} />
               </div>
               <p>O café chega fresquinho até você</p>
